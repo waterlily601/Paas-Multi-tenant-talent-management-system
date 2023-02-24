@@ -16,7 +16,7 @@ public class Main {
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         dataSourceConfig.setDbType(DbType.MYSQL);
         dataSourceConfig.setDriverName("com.mysql.cj.jdbc.Driver");
-        dataSourceConfig.setUrl("jdbc:mysql://localhost:3306/environment");
+        dataSourceConfig.setUrl("jdbc:mysql://localhost:3306/paas");//数据库名
         dataSourceConfig.setUsername("root");
         dataSourceConfig.setPassword("123456");
         autoGenerator.setDataSource(dataSourceConfig);
@@ -39,7 +39,7 @@ public class Main {
         autoGenerator.setPackageInfo(packageConfig);
         //策略配置
         StrategyConfig strategyConfig = new StrategyConfig();
-        strategyConfig.setInclude("alarmrecord","environmentbaseinfo","equipmentbaseinfo","equipmentmaintenancerecord","equipmentpurchaseapply","equipmentpurchaserecord","equipmentscraprecord","manualregulationrecord","parametersetting","environment_admin","equipment_admin");
+        strategyConfig.setInclude("system_admin","company_admin");//表名
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setEntityLombokModel(true);

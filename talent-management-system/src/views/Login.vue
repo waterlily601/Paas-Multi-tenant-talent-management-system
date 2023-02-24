@@ -20,9 +20,9 @@
         ></el-input>
       </el-form-item>
       <el-form-item>
-        <el-radio v-model="type" label="quarantineAdmin">后台管理员</el-radio>
-        <el-radio style="position: relative;left: 10px" v-model="type" label="Admin">HR</el-radio>
-        <el-radio style="position: relative;left: 10px" v-model="type" label="cleaningAdmin">公司管理员</el-radio>
+        <el-radio v-model="type" label="systemAdmin">后台管理员</el-radio>
+        <el-radio style="position: relative;left: 10px" v-model="type" label="HR">HR</el-radio>
+        <el-radio style="position: relative;left: 10px" v-model="type" label="companyAdmin">公司管理员</el-radio>
 
       </el-form-item>
       <el-form-item style="width:100%;">
@@ -39,10 +39,10 @@ export default {
     return{
       logining: false,
       ruleForm: {
-        username: 'qua1',
+        username: 'admin',
         password: '123123'
       },
-      type: 'quarantineAdmin',
+      type: 'systemAdmin',
       rules: {  //非空校验
         username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
         password: [{required: true, message: '请输入密码', trigger: 'blur'}]
@@ -55,8 +55,8 @@ export default {
         if(valid){
           this.logining = true
           let _this=this
-          if(_this.type=='quarantineAdmin'){
-            axios.get('http://localhost:8181/quarantineAdmin/login', {params:_this.ruleForm}).then(function (resp) {
+          if(_this.type=='systemAdmin'){
+            axios.get('http://localhost:8181/systemAdmin/login', {params:_this.ruleForm}).then(function (resp) {
               _this.logining = false
               if(resp.data.code==-1){
                 _this.$alert('用户名不存在', '提示', {
@@ -69,15 +69,15 @@ export default {
                 })
               }
               if(resp.data.code==0){
-                //跳转到quarantineAdmin
+                //跳转到Admin
                 //展示当前登录用户信息
-                localStorage.setItem('quarantineAdmin',JSON.stringify(resp.data.data))
-                _this.$router.replace({path:'/quarantineAdmin'})
+                localStorage.setItem('systemAdmin',JSON.stringify(resp.data.data))
+                _this.$router.replace({path:'/systemAdmin'})
               }
             })
           }
-          if(_this.type == 'cleaningAdmin'){
-            axios.get('http://localhost:8181/cleaningAdmin/login', {params:_this.ruleForm}).then(function (resp) {
+          if(_this.type == 'HR'){
+            axios.get('http://localhost:8181/HR/login', {params:_this.ruleForm}).then(function (resp) {
               _this.logining = false
               if(resp.data.code == -1){
                 _this.$alert('用户名不存在', '提示', {
@@ -92,8 +92,29 @@ export default {
               if(resp.data.code == 0){
                 //跳转到cleaningAdmin
                 //展示当前登录用户信息
-                localStorage.setItem('cleaningAdmin',JSON.stringify(resp.data.data))
-                _this.$router.replace({path:'/cleaningAdmin'})
+                localStorage.setItem('HR',JSON.stringify(resp.data.data))
+                _this.$router.replace({path:'/hr'})
+              }
+            })
+          }
+          if(_this.type == 'companyAdmin'){
+            axios.get('http://localhost:8181/companyAdmin/login', {params:_this.ruleForm}).then(function (resp) {
+              _this.logining = false
+              if(resp.data.code == -1){
+                _this.$alert('用户名不存在', '提示', {
+                  confirmButtonText: '确定'
+                })
+              }
+              if(resp.data.code == -2){
+                _this.$alert('密码错误', '提示', {
+                  confirmButtonText: '确定'
+                })
+              }
+              if(resp.data.code == 0){
+                //跳转到cleaningAdmin
+                //展示当前登录用户信息
+                localStorage.setItem('companyAdmin',JSON.stringify(resp.data.data))
+                _this.$router.replace({path:'/companyAdmin'})
               }
             })
           }
