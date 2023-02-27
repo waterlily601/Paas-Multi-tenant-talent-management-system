@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="TalentManagementSystemApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="talent_management_system" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.pmttms.TalentManagementSystemApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
