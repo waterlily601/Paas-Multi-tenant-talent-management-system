@@ -1,7 +1,11 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="TalentManagementSystemApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
     <module name="talent_management_system" />
+    <selectedOptions>
+      <option name="vmParameters" visible="false" />
+    </selectedOptions>
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.pmttms.TalentManagementSystemApplication" />
+    <option name="ALTERNATIVE_JRE_PATH" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

@@ -6,6 +6,10 @@ import SystemAdmin from "@/views/SystemAdmin.vue";
 import CompanyAdminRecord from "@/views/CompanyAdminRecord.vue";
 import CompanyAdminManagement from "@/views/CompanyAdminManagement.vue";
 import Signup from "@/views/Signup.vue";
+import CompanyAdmin from "@/views/CompanyAdmin.vue";
+import departmentManagement from "@/views/DepartmentManagement.vue";
+import departmentAdd from "@/views/DepartmentAdd.vue";
+import departmentUpdate from "@/views/DepartmentUpdate.vue";
 
 Vue.use(VueRouter)
 
@@ -42,6 +46,29 @@ const routes = [
       name: '审批记录',
       component: CompanyAdminRecord
     }
+    ]
+  },
+  {
+    path: '/companyAdmin',
+    name: '系统管理员',
+    component: CompanyAdmin,
+    redirect: '/departmentManagement',
+    children:[
+      {
+        path: '/departmentManagement',
+        name: '部门信息管理',
+        component: departmentManagement
+      },
+      {
+        path: '/departmentAdd',
+        name: '部门添加',
+        component: departmentAdd
+      },
+      {
+        path: '/departmentUpdate',
+        name: '部门信息修改',
+        component: departmentUpdate
+      },
     ]
   },
   {

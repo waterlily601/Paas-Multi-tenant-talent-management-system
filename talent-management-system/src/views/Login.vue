@@ -97,7 +97,7 @@ export default {
               }
             })
           }
-          if(_this.type == 'companyAdmin'){
+          if(_this.type == 'companyAdmin'){//公司管理员
             axios.get('http://localhost:8181/companyAdmin/login', {params:_this.ruleForm}).then(function (resp) {
               _this.logining = false
               if(resp.data.code == -1){
@@ -113,7 +113,7 @@ export default {
               if(resp.data.code == 0){
                 //跳转到cleaningAdmin
                 //展示当前登录用户信息
-                localStorage.setItem('companyAdmin',JSON.stringify(resp.data.data))
+                localStorage.setItem('CompanyAdmin',JSON.stringify(resp.data.data))
                 _this.$router.replace({path:'/companyAdmin'})
               }
             })
