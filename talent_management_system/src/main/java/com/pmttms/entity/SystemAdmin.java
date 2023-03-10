@@ -10,15 +10,15 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author admin
- * @since 2023-02-24
+ * @since 2023-03-01
  */
 @Data
   @EqualsAndHashCode(callSuper = false)
-    public class SystemAdmin implements Serializable {
+    public class Systemadmin implements Serializable {
 
     private static final long serialVersionUID=1L;
 
-      private String username;
+    private String username;
 
     private String password;
 

@@ -56,10 +56,10 @@ export default {
           this.logining = true
           let _this=this
           if(_this.type=='systemAdmin'){
-            axios.get('http://localhost:8181/systemAdmin/login', {params:_this.ruleForm}).then(function (resp) {
+            axios.get('http://localhost:8181/systemadmin/login', {params:_this.ruleForm}).then(function (resp) {
               _this.logining = false
               if(resp.data.code==-1){
-                _this.$alert('用户名不存在', '提示', {
+                _this.$alert('用户名未成功注册', '提示', {
                   confirmButtonText: '确定'
                 })
               }
@@ -77,10 +77,10 @@ export default {
             })
           }
           if(_this.type == 'HR'){
-            axios.get('http://localhost:8181/HR/login', {params:_this.ruleForm}).then(function (resp) {
+            axios.get('http://localhost:8181/hradmin/login', {params:_this.ruleForm}).then(function (resp) {
               _this.logining = false
               if(resp.data.code == -1){
-                _this.$alert('用户名不存在', '提示', {
+                _this.$alert('用户名未成功注册', '提示', {
                   confirmButtonText: '确定'
                 })
               }
@@ -93,15 +93,16 @@ export default {
                 //跳转到cleaningAdmin
                 //展示当前登录用户信息
                 localStorage.setItem('HR',JSON.stringify(resp.data.data))
-                _this.$router.replace({path:'/hr'})
+                _this.$router.replace({path:'/HRhome'})
               }
             })
           }
           if(_this.type == 'companyAdmin'){
-            axios.get('http://localhost:8181/companyAdmin/login', {params:_this.ruleForm}).then(function (resp) {
+            axios.get('http://localhost:8181/companyadmin/login', {params:_this.ruleForm}).then(function (resp) {
               _this.logining = false
+              console.log(resp.data.code)
               if(resp.data.code == -1){
-                _this.$alert('用户名不存在', '提示', {
+                _this.$alert('用户名未成功注册', '提示', {
                   confirmButtonText: '确定'
                 })
               }

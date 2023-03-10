@@ -16,9 +16,9 @@ public class Main {
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         dataSourceConfig.setDbType(DbType.MYSQL);
         dataSourceConfig.setDriverName("com.mysql.cj.jdbc.Driver");
-        dataSourceConfig.setUrl("jdbc:mysql://localhost:3306/paas");//数据库名
+        dataSourceConfig.setUrl("jdbc:mysql://localhost:3306/talent");//数据库名
         dataSourceConfig.setUsername("root");
-        dataSourceConfig.setPassword("123456");
+        dataSourceConfig.setPassword("PAASServer6");
         autoGenerator.setDataSource(dataSourceConfig);
         //全局配置
         GlobalConfig globalConfig = new GlobalConfig();
@@ -39,7 +39,7 @@ public class Main {
         autoGenerator.setPackageInfo(packageConfig);
         //策略配置
         StrategyConfig strategyConfig = new StrategyConfig();
-        strategyConfig.setInclude("system_admin","company_admin");//表名
+        strategyConfig.setInclude("checkonwork","companyadmin","companyinfo","department","employee","hradmin","performance","systemadmin");//表名
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setEntityLombokModel(true);

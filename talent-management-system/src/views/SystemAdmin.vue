@@ -19,20 +19,17 @@
 
         <el-menu router>
           <el-submenu index="1">
-            <template slot="title"><i class="el-icon-s-platform"></i>审批模块</template>
-<!--            <el-menu-item index="/animalAdd" :class="$route.path=='/animalAdd'?'is-active':''">-->
-<!--              <i class="el-icon-folder-add"></i>入房申请-->
-<!--            </el-menu-item>-->
-            <el-menu-item index="/entryManagement" :class="$route.path=='/companyAdminManagement'?'is-active':''">
+            <template slot="title"><i class="el-icon-s-platform"></i>审批</template>
+            <el-menu-item index="/companyAdminManagement" :class="$route.path=='/companyAdminManagement'?'is-active':''">
               <i class="el-icon-s-check"></i>注册审批
             </el-menu-item>
-            <el-menu-item index="/entryRecord" :class="$route.path=='/companyAdminRecord'?'is-active':''">
+            <el-menu-item index="/companyAdminRecord" :class="$route.path=='/companyAdminRecord'?'is-active':''">
               <i class="el-icon-document-copy"></i>审批记录
             </el-menu-item>
-<!--            <el-menu-item index="/entryApplyResult" :class="$route.path=='/entryApplyResult'?'is-active':''">-->
-<!--              <i class="el-icon-document-copy"></i>入房申请结果-->
-<!--            </el-menu-item>-->
           </el-submenu>
+          <el-menu-item index="/companyinfo" :class="$route.path=='/companyinfo'?'is-active':''">
+            <i class="el-icon-folder-add"></i>公司管理
+          </el-menu-item>
         </el-menu>
 
       </el-aside>

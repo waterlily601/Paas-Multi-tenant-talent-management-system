@@ -1,6 +1,6 @@
 package com.pmttms.mapper;
 
-import com.pmttms.entity.SystemAdmin;
+import com.pmttms.entity.Systemadmin;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,9 +10,9 @@ import org.apache.ibatis.annotations.Mapper;
  * </p>
  *
  * @author admin
- * @since 2023-02-24
+ * @since 2023-03-01
  */
 @Mapper
-public interface SystemAdminMapper extends BaseMapper<SystemAdmin> {
+public interface SystemadminMapper extends BaseMapper<Systemadmin> {
 
 }

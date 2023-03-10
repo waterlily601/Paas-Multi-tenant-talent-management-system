@@ -1,10 +1,10 @@
 package com.pmttms.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.pmttms.entity.SystemAdmin;
+import com.pmttms.entity.Systemadmin;
 import com.pmttms.form.RuleForm;
-import com.pmttms.mapper.SystemAdminMapper;
-import com.pmttms.service.SystemAdminService;
+import com.pmttms.mapper.SystemadminMapper;
+import com.pmttms.service.SystemadminService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.pmttms.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +16,19 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author admin
- * @since 2023-02-24
+ * @since 2023-03-01
  */
 @Service
-public class SystemAdminServiceImpl extends ServiceImpl<SystemAdminMapper, SystemAdmin> implements SystemAdminService {
-
+public class SystemadminServiceImpl extends ServiceImpl<SystemadminMapper, Systemadmin> implements SystemadminService {
     @Autowired
-    private SystemAdminMapper systemAdminMapper;
+    private SystemadminMapper systemAdminMapper;
 
     @Override
     public ResultVO login(RuleForm ruleForm) {
         //1、判断用户名是否存在
-        QueryWrapper<SystemAdmin> queryWrapper=new QueryWrapper<>();
+        QueryWrapper<Systemadmin> queryWrapper=new QueryWrapper<>();
         queryWrapper.eq("username",ruleForm.getUsername());
-        SystemAdmin systemAdmin = this.systemAdminMapper.selectOne(queryWrapper);
+        Systemadmin systemAdmin = this.systemAdminMapper.selectOne(queryWrapper);
         ResultVO resultVO=new ResultVO();
         if(systemAdmin==null){
             resultVO.setCode(-1);

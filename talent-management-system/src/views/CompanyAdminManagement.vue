@@ -3,9 +3,13 @@
     <el-form style="margin-left: -40px" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
       <el-form-item label="字段：" prop="key">
         <el-select v-model="ruleForm.key" style="width: 160px;float: left" placeholder="请选择字段">
-          <el-option label="公司名" value="company_name"></el-option>
+          <el-option label="公司名" value="companyname"></el-option>
           <el-option label="账号" value="username"></el-option>
           <el-option label="密码" value="password"></el-option>
+          <el-option label="公司法人" value="legalperson"></el-option>
+          <el-option label="公司地址" value="address"></el-option>
+          <el-option label="联系方式" value="telephone"></el-option>
+          <el-option label="邮箱" value="email"></el-option>
         </el-select>
       </el-form-item>
       <div style="border: 0px solid red;width: 400px;height: 60px;position: relative;top: -64px;left: 270px">
@@ -23,7 +27,7 @@
         style="width: 100%;position: relative;top:-30px">
       <el-table-column
           fixed
-          prop="companyName"
+          prop="companyname"
           label="公司名"
           width="125">
       </el-table-column>
@@ -35,6 +39,26 @@
       <el-table-column
           prop="password"
           label="密码"
+          width="125">
+      </el-table-column>
+      <el-table-column
+          prop="legalperson"
+          label="公司法人"
+          width="125">
+      </el-table-column>
+      <el-table-column
+          prop="address"
+          label="公司地址"
+          width="125">
+      </el-table-column>
+      <el-table-column
+          prop="telephone"
+          label="联系方式"
+          width="125">
+      </el-table-column>
+      <el-table-column
+          prop="email"
+          label="邮箱"
           width="125">
       </el-table-column>
       <el-table-column label="操作">
@@ -93,42 +117,41 @@ export default {
         if (valid) {
           const _this = this
           _this.ruleForm.page = _this.currentPage
-          axios.get('http://localhost:8181/companyAdmin/search',{params:_this.ruleForm}).then(function (resp) {
+          axios.get('http://localhost:8181/companyadmin/search',{params:_this.ruleForm}).then(function (resp) {
             _this.tableData = resp.data.data.data
             _this.total = resp.data.data.total
           })
         }
       });
-
     },
     page(currentPage){
-      // const _this = this
-      // if(_this.ruleForm.value == ''){
-      //   axios.get('http://localhost:8181/companyAdmin/list/'+currentPage+'/'+_this.pageSize).then(function (resp) {
-      //     _this.tableData = resp.data.data.data
-      //     _this.total = resp.data.data.total
-      //   })
-      // } else {
-      //   _this.ruleForm.page = _this.currentPage
-      //   axios.get('http://localhost:8181/companyAdmin/search',{params:_this.ruleForm}).then(function (resp) {
-      //     _this.tableData = resp.data.data.data
-      //     _this.total = resp.data.data.total
-      //   })
-      // }
+      const _this = this
+      if(_this.ruleForm.value == ''){
+        axios.get('http://localhost:8181/companyadmin/list/'+currentPage+'/'+_this.pageSize).then(function (resp) {
+          _this.tableData = resp.data.data.data
+          _this.total = resp.data.data.total
+        })
+      } else {
+        _this.ruleForm.page = _this.currentPage
+        axios.get('http://localhost:8181/companyadmin/search',{params:_this.ruleForm}).then(function (resp) {
+          _this.tableData = resp.data.data.data
+          _this.total = resp.data.data.total
+        })
+      }
 
     },
     agree(row){
       const _this = this
-          axios.put('http://localhost:8181/companyAdmin/agree/'+row.id).then(function (resp) {
-            if(resp.data.code == 0){
-              _this.$alert('注册申请【'+row.username+'】审批成功', '', {
-                confirmButtonText: '确定',
-                callback: action => {
-                  location.reload()
-                }
-              });
+      axios.put('http://localhost:8181/companyadmin/agree/'+row.companyID).then(function (resp) {
+        if(resp.data.code == 0){
+          _this.$alert('注册申请【'+row.username+'】审批成功', '', {
+            confirmButtonText: '确定',
+            callback: action => {
+              location.reload()
             }
-          })
+          });
+        }
+      })
     },
     refuse(row) {
       const _this = this
@@ -137,7 +160,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        axios.put('http://localhost:8181/companyAdmin/refuse/'+row.id).then(function (resp) {
+        axios.put('http://localhost:8181/companyadmin/refuse/'+row.companyID).then(function (resp) {
           if(resp.data.code==0){
             _this.$alert('注册申请【'+row.username+'】已拒绝', '', {
               confirmButtonText: '确定',
@@ -152,7 +175,7 @@ export default {
   },
   created() {
     const _this = this
-    axios.get('http://localhost:8181/companyAdmin/list/1/'+_this.pageSize).then(function (resp) {
+    axios.get('http://localhost:8181/companyadmin/list/1/'+_this.pageSize).then(function (resp) {
       _this.tableData = resp.data.data.data
       _this.total = resp.data.data.total
     })

@@ -1,6 +1,6 @@
 package com.pmttms.service;
 
-import com.pmttms.entity.SystemAdmin;
+import com.pmttms.entity.Systemadmin;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.pmttms.form.RuleForm;
 import com.pmttms.vo.ResultVO;
@@ -11,8 +11,8 @@ import com.pmttms.vo.ResultVO;
  * </p>
  *
  * @author admin
- * @since 2023-02-24
+ * @since 2023-03-01
  */
-public interface SystemAdminService extends IService<SystemAdmin> {
+public interface SystemadminService extends IService<Systemadmin> {
     public ResultVO login(RuleForm ruleForm);
 }

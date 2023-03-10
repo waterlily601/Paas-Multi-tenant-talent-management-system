@@ -2,7 +2,7 @@ package com.pmttms.controller;
 
 
 import com.pmttms.form.RuleForm;
-import com.pmttms.service.SystemAdminService;
+import com.pmttms.service.SystemadminService;
 import com.pmttms.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,20 +17,18 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author admin
- * @since 2023-02-24
+ * @since 2023-03-01
  */
 @RestController
-@RequestMapping("/systemAdmin")
-public class SystemAdminController {
-
+@RequestMapping("/systemadmin")
+public class SystemadminController {
     @Autowired
-    private SystemAdminService systemAdminService;
+    private SystemadminService systemAdminService;
 
     @GetMapping("/login")
     public ResultVO login(RuleForm ruleForm){
         ResultVO resultVO = this.systemAdminService.login(ruleForm);
         return resultVO;
     }
-
 }
 

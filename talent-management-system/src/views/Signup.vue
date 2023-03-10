@@ -1,14 +1,26 @@
 <template>
   <div style="margin-top: 60px;margin-left:330px;width: 300px;height: 500px;border: 0px solid red;" >
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="公司名" prop="companyName">
-        <el-input v-model="ruleForm.companyName"></el-input>
+      <el-form-item label="公司名" prop="companyname">
+        <el-input v-model="ruleForm.companyname"></el-input>
       </el-form-item>
       <el-form-item label="账号" prop="username">
         <el-input v-model="ruleForm.username"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input v-model="ruleForm.password"></el-input>
+        <el-input type="password" v-model="ruleForm.password"></el-input>
+      </el-form-item>
+      <el-form-item label="法人名称" prop="legalperson">
+        <el-input v-model="ruleForm.legalperson"></el-input>
+      </el-form-item>
+      <el-form-item label="公司地址" prop="address">
+        <el-input v-model="ruleForm.address"></el-input>
+      </el-form-item>
+      <el-form-item label="联系电话" prop="telephone">
+        <el-input v-model="ruleForm.telephone"></el-input>
+      </el-form-item>
+      <el-form-item label="邮箱" prop="email">
+        <el-input v-model="ruleForm.email"></el-input>
       </el-form-item>
 
       <el-form-item>
@@ -26,27 +38,36 @@ export default {
     return {
       category:null,
       ruleForm: {
-        companyName: '',
+        companyname: '',
         username: '',
-        password: ''
+        password: '',
+        legalperson: '',
+        address: '',
+        telephone: '',
+        email: ''
       },
       rules: {
-        // animalSpecies: [
-        //   { required: true, message: '请输入公司名', trigger: 'blur' },
-        //   { required: true, pattern: /^[\u2E80-\u9FFF]+$/, message: '请输入动物种类', trigger: 'blur' }
-        // ],
-        // animalOrigin: [
-        //   { required: true, message: '请输入动物来源', trigger: 'blur' },
-        //   { required: true, pattern: /^[\u2E80-\u9FFF]+$/, message: '请输入动物来源', trigger: 'blur' }
-        // ],
-        // numberOfAnimals: [
-        //   { required: true, message: '请输入动物数量', trigger: 'blur' },
-        //   { required: true, pattern: /^\d{1,5}$/, message: '请输入动物数量', trigger: 'blur' }
-        // ],
-        // contactDetails: [
-        //   { required: true, message: '请输入联系方式', trigger: 'blur' },
-        //   { required: true, pattern: /^\d{11}$/, message: '请输入联系方式', trigger: 'blur' }
-        // ]
+        username: [
+          { required: true, message: '请输入账号', trigger: 'blur' },
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' },
+        ],
+        companyname: [
+          { required: true, message: '请输入公司名称', trigger: 'blur' },
+        ],
+        legalperson: [
+          { required: true, message: '请输入公司法人', trigger: 'blur' },
+          { required: true, pattern: /^[\u2E80-\u9FFF]+$/, message: '请输入公司法人', trigger: 'blur' }
+        ],
+        address: [
+          { required: true, message: '请输入公司地址', trigger: 'blur' },
+          { required: true, pattern: /^[\u2E80-\u9FFF]+$/, message: '请输入公司地址', trigger: 'blur' }
+        ],
+        telephone: [
+          { required: true, message: '请输入公司电话', trigger: 'blur' },
+          { required: true, pattern: /^\d{11}$/, message: '请输入公司电话', trigger: 'blur' }
+        ]
       }
     };
   },
@@ -55,14 +76,28 @@ export default {
       const _this = this
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          axios.post('http://localhost:8181/companyAdmin/save',_this.ruleForm).then(function (resp) {
-            if(resp.data.code == 0){
-              _this.$alert('注册申请成功', '', {
-                confirmButtonText: '确定',
-                callback: action => {
-                  _this.$router.push('/login')
+          axios.post('http://localhost:8181/companyadmin/save',_this.ruleForm).then(function (resp) {
+            if(resp.data.code==-1){
+              _this.$alert('账号已存在', '提示', {
+                confirmButtonText: '确定'
+              })
+            }
+            if(resp.data.code==-2){
+              _this.$alert('未知错误，注册失败', '提示', {
+                confirmButtonText: '确定'
+              })
+            }
+            if(resp.data.code==0){
+              axios.post('http://localhost:8181/companyinfo/save',_this.ruleForm).then(function (resp) {
+                if(resp.data.code==0){
+                  _this.$alert('注册申请成功', '', {
+                    confirmButtonText: '确定',
+                    callback: action => {
+                      _this.$router.push('/login')
+                    }
+                  });
                 }
-              });
+              })
             }
           })
         }
@@ -72,11 +107,5 @@ export default {
       this.$refs[formName].resetFields();
     }
   },
-  // created() {
-  //   const _this = this
-  //   axios.get('http://localhost:8181/dormitory/availableList').then(function (resp) {
-  //     _this.dormitoryList = resp.data.data
-  //   })
-  // }
 }
 </script>

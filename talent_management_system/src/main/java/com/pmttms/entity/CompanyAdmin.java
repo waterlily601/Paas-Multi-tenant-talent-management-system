@@ -1,9 +1,8 @@
 package com.pmttms.entity;
 
-import java.io.Serializable;
-
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,24 +12,32 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author admin
- * @since 2023-02-24
+ * @since 2023-03-09
  */
 @Data
   @EqualsAndHashCode(callSuper = false)
-    public class CompanyAdmin implements Serializable {
+    public class Companyadmin implements Serializable {
 
     private static final long serialVersionUID=1L;
 
-      private String username;
+      @TableId(value = "companyID", type = IdType.AUTO)
+      private Integer companyID;
+
+    private String companyname;
+
+    private String username;
 
     private String password;
 
-    private String companyName;
+    private String state="待审批";
 
-    private String state= "待审批";
+    private String legalperson;
 
-  @TableId(type = IdType.AUTO)
-  private Integer id;
+    private String address;
+
+    private String telephone;
+
+    private String email;
 
 
 }
